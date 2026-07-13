@@ -18,10 +18,9 @@ Puedo copiarlo desde cualquier lugar.
 <button onclick="copiar()">Copiar</button>
 
 <script>
-function copiar() {
-    let texto = document.getElementById("texto");
-    navigator.clipboard.writeText(texto.value);
-    alert("Texto copiado");
+async function copiar() {
+    let texto = document.getElementById("texto").value;
+    await navigator.clipboard.writeText(texto);
 }
 </script>
 
