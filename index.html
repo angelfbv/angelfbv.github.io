@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Mi portapapeles</title>
+</head>
+
+<body>
+
+<h1>Texto para copiar</h1>
+
+<textarea id="texto" rows="10" cols="50">
+Este es mi texto guardado.
+Puedo copiarlo desde cualquier lugar.
+</textarea>
+
+<br><br>
+
+<button onclick="copiar()">Copiar</button>
+
+<script>
+function copiar() {
+    let texto = document.getElementById("texto");
+    navigator.clipboard.writeText(texto.value);
+    alert("Texto copiado");
+}
+</script>
+
+</body>
+</html>
