@@ -9,8 +9,96 @@
 <h1>Apurate</h1>
 
 <textarea id="texto" rows="10" cols="50">
-Este es mi texto guardado.
-Puedo copiarlo desde cualquier lugar. Ahora
+def mostrarMensaje(mensaje:String):Unit={
+    println(mensaje)
+  }
+
+  def ingresarEnteroPosi(mensaje:String):Int={
+    var num = 0
+    var valido = false
+    while(!valido){
+      try{
+        println(mensaje)
+        num = readLine().toInt
+        if(num>=0){
+          valido = true
+        }
+      }catch {
+        case _: NumberFormatException =>
+          println("Error, solo ingrese numeros enteros")
+      }
+    }
+    num
+  }
+
+  def ingresarCadena(mensaje:String):String={
+    var cadena = ""
+    var valido = false
+    while (!valido){
+      println(mensaje)
+      cadena = readLine()
+      if(cadena != ""){
+        valido = true
+      }
+    }
+    cadena
+  }
+
+  def ingresarDoublePosi(mensaje:String):Double={
+    var num = 0.0
+    var valido = false
+    while(!valido){
+      try{
+        println(mensaje)
+        num = readLine().toDouble
+        if(num>=0.0){
+          valido = true
+        }
+      }catch {
+        case _: NumberFormatException =>
+          println("Error, solo ingrese numeros reales")
+      }
+    }
+    num
+  }
+
+  def listar[T](l: Vector[T]):Unit={
+    l.foreach(t => println(t.toString))
+  }
+    def guardar():Unit={
+    val v1 = new ObjectOutputStream(new FileOutputStream(rutaVehi))
+    v1.writeObject(listaVehiculos)
+    v1.close()
+
+    val v2 = new ObjectOutputStream(new FileOutputStream(rutaRecorrido))
+    v2.writeObject(listaRecorridos)
+    v2.close()
+
+    val v3 = new ObjectOutputStream(new FileOutputStream(rutaRegistro))
+    v3.writeObject(listaRegistrosDiarios)
+    v3.close()
+  }
+
+  def cargar():Boolean={
+    try{
+      val v1 = new ObjectInputStream(new FileInputStream(rutaVehi))
+      listaVehiculos = v1.readObject().asInstanceOf[Vector[Vehiculo]]
+      v1.close()
+
+      val v2 = new ObjectInputStream(new FileInputStream(rutaRecorrido))
+      listaRecorridos = v2.readObject().asInstanceOf[Vector[Recorrido]]
+      v2.close()
+
+      val v3 = new ObjectInputStream(new FileInputStream(rutaRegistro))
+      listaRegistrosDiarios = v3.readObject().asInstanceOf[Vector[RegistroDiario]]
+      v3.close()
+
+      true
+    }catch {
+      case _: FileNotFoundException =>
+        false
+    }
+  }
 </textarea>
 
 <br><br>
