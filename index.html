@@ -6,99 +6,36 @@
 
 <body>
 
-<h1>Apurate</h1>
+<h1>ok</h1>
 
 <textarea id="texto" rows="10" cols="50">
-def mostrarMensaje(mensaje:String):Unit={
-    println(mensaje)
-  }
+Modelo imperativo: Surge ligado a la arquitectura de von neuman
+Su funcionamiento se basa en una secuencia de instrucciones que modifican el estado de la memoria mediante sentencias de asignación.
+Organiza el código dividiéndolo en procedimientos o subrutinas (programación estructura y modular)
+La memoria se divide formalmente en tres áreas:
+Datos estáticos/globales: Almacena variables globales, constantes y funciones accesibles desde cualquier parte del programa
+Pila de ejecución: Controlada por el puntero de pila. Contiene un registro de activación por cada llamada a función activa (almacena variables locales, dirección de retorno y parámetros), se crea al llamar a la función y se destruye al finalizar
+Monticulo: Memoria de ejecución dinámica en tiempo de ejecución
+Lenguajes: (C Dennis Ritchie, 1972), (Fortran John Backus, 1957)
 
-  def ingresarEnteroPosi(mensaje:String):Int={
-    var num = 0
-    var valido = false
-    while(!valido){
-      try{
-        println(mensaje)
-        num = readLine().toInt
-        if(num>=0){
-          valido = true
-        }
-      }catch {
-        case _: NumberFormatException =>
-          println("Error, solo ingrese numeros enteros")
-      }
-    }
-    num
-  }
+Modelo Funcional: Sus raíces matemáticas surgen del cálculo lambda de Alonzo Church en 1936.
+Su operación principal es la evaluación de expresiones y la aplicación de funciones con paso de parámetros.
+Las funciones son valores de primera clase, por lo que pueden pasarse como argumentos a otras funciones y retornarse como valores.
+Los datos no se modifican directamente en memoria, se generan nuevos valores a partir de los antiguos sin alterar los existentes.
+Lenguajes (Lisp John Mckarty, 1958), (Standar ML, Robin Milner y otros) 
 
-  def ingresarCadena(mensaje:String):String={
-    var cadena = ""
-    var valido = false
-    while (!valido){
-      println(mensaje)
-      cadena = readLine()
-      if(cadena != ""){
-        valido = true
-      }
-    }
-    cadena
-  }
+Modelo lógico: Basado en la lógica proposicional y la lógica de predicados de primer orden
+El programador provee una base de datos de hechos y reglas que describen el problema
+El interprete evalua las consultas mediante un motor de inferencia 
+Estructura del montículo: En el heap se almacena la base de datos de hechos y reglas. En lenguajes como Prolog permite agregar (assert) o remover (retrac) reglas durante la ejecución
+Lenguajes: (Prolog, 1972), (Mercury)
 
-  def ingresarDoublePosi(mensaje:String):Double={
-    var num = 0.0
-    var valido = false
-    while(!valido){
-      try{
-        println(mensaje)
-        num = readLine().toDouble
-        if(num>=0.0){
-          valido = true
-        }
-      }catch {
-        case _: NumberFormatException =>
-          println("Error, solo ingrese numeros reales")
-      }
-    }
-    num
-  }
+Modelo Orientado a Objetos: Surge como una evolución del paradigma imperativo, incorporando objetos y clases.
+Sustituye la estructura procidimental agrupando datos (atributos) y comportamientos (metodos) dentro de clases u objetos.
+Implementa un diseño avanzado con los pilares: Abstraccion, encapsulamiento, herencia y polimorfismo
+Sobre el manejo de memoria los objetos se crean dinamincamente en el montículo. En lenguajes como c++ el programador gestiona manualmente la memoria, mientras que en Java y Python la memoria del montículo es liberada automáticamente por un recolector de basura
+Lenguajes: (Java James Gosling, 1995), (C++, Bjarne Stroustrup, 1985)
 
-  def listar[T](l: Vector[T]):Unit={
-    l.foreach(t => println(t.toString))
-  }
-    def guardar():Unit={
-    val v1 = new ObjectOutputStream(new FileOutputStream(rutaVehi))
-    v1.writeObject(listaVehiculos)
-    v1.close()
-
-    val v2 = new ObjectOutputStream(new FileOutputStream(rutaRecorrido))
-    v2.writeObject(listaRecorridos)
-    v2.close()
-
-    val v3 = new ObjectOutputStream(new FileOutputStream(rutaRegistro))
-    v3.writeObject(listaRegistrosDiarios)
-    v3.close()
-  }
-
-  def cargar():Boolean={
-    try{
-      val v1 = new ObjectInputStream(new FileInputStream(rutaVehi))
-      listaVehiculos = v1.readObject().asInstanceOf[Vector[Vehiculo]]
-      v1.close()
-
-      val v2 = new ObjectInputStream(new FileInputStream(rutaRecorrido))
-      listaRecorridos = v2.readObject().asInstanceOf[Vector[Recorrido]]
-      v2.close()
-
-      val v3 = new ObjectInputStream(new FileInputStream(rutaRegistro))
-      listaRegistrosDiarios = v3.readObject().asInstanceOf[Vector[RegistroDiario]]
-      v3.close()
-
-      true
-    }catch {
-      case _: FileNotFoundException =>
-        false
-    }
-  }
 </textarea>
 
 <br><br>
