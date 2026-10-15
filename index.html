@@ -9,33 +9,55 @@
 <h1>ok</h1>
 
 <textarea id="texto" rows="10" cols="50">
-Modelo imperativo: Surge ligado a la arquitectura de von neuman
-Su funcionamiento se basa en una secuencia de instrucciones que modifican el estado de la memoria mediante sentencias de asignación.
-Organiza el código dividiéndolo en procedimientos o subrutinas (programación estructura y modular)
-La memoria se divide formalmente en tres áreas:
-Datos estáticos/globales: Almacena variables globales, constantes y funciones accesibles desde cualquier parte del programa
-Pila de ejecución: Controlada por el puntero de pila. Contiene un registro de activación por cada llamada a función activa (almacena variables locales, dirección de retorno y parámetros), se crea al llamar a la función y se destruye al finalizar
-Monticulo: Memoria de ejecución dinámica en tiempo de ejecución
-Lenguajes: (C Dennis Ritchie, 1972), (Fortran John Backus, 1957)
+Ejercicio 4. Conceptos
 
-Modelo Funcional: Sus raíces matemáticas surgen del cálculo lambda de Alonzo Church en 1936.
-Su operación principal es la evaluación de expresiones y la aplicación de funciones con paso de parámetros.
-Las funciones son valores de primera clase, por lo que pueden pasarse como argumentos a otras funciones y retornarse como valores.
-Los datos no se modifican directamente en memoria, se generan nuevos valores a partir de los antiguos sin alterar los existentes.
-Lenguajes (Lisp John Mckarty, 1958), (Standar ML, Robin Milner y otros) 
+a) Ligaduras y tipos:
 
-Modelo lógico: Basado en la lógica proposicional y la lógica de predicados de primer orden
-El programador provee una base de datos de hechos y reglas que describen el problema
-El interprete evalua las consultas mediante un motor de inferencia 
-Estructura del montículo: En el heap se almacena la base de datos de hechos y reglas. En lenguajes como Prolog permite agregar (assert) o remover (retrac) reglas durante la ejecución
-Lenguajes: (Prolog, 1972), (Mercury)
+* Ligadura estática: El tipo de dato se asocia a la variable durante la compilación.
+* Ligadura dinámica: El tipo de dato se asocia a la variable durante la ejecución, al asignarle un valor.
+* Disciplina de tipos: Nivel de rigurosidad del lenguaje para forzar el cumplimiento de los tipos (tipado fuerte vs. débil).
 
-Modelo Orientado a Objetos: Surge como una evolución del paradigma imperativo, incorporando objetos y clases.
-Sustituye la estructura procidimental agrupando datos (atributos) y comportamientos (metodos) dentro de clases u objetos.
-Implementa un diseño avanzado con los pilares: Abstraccion, encapsulamiento, herencia y polimorfismo
-Sobre el manejo de memoria los objetos se crean dinamincamente en el montículo. En lenguajes como c++ el programador gestiona manualmente la memoria, mientras que en Java y Python la memoria del montículo es liberada automáticamente por un recolector de basura
-Lenguajes: (Java James Gosling, 1995), (C++, Bjarne Stroustrup, 1985)
+b) Conversiones y errores:
 
+* Coacción: Conversión implícita y automática de un tipo a otro por el compilador.
+* Comprobación de tipos: Proceso de verificar que los tipos de las variables involucradas en una operación son compatibles.
+* Error de tipos: Fallo que ocurre al intentar aplicar una operación a tipos incompatibles.
+
+c) Compatibilidad:
+
+* Nominal: Dos tipos son compatibles solo si tienen exactamente el mismo nombre definido en el código.
+* Estructural: Dos tipos son compatibles si la estructura de su memoria (ejemplo: los campos de un registro) es idéntica, sin importar cómo se llamen.
+
+Ejercicio 5. Clasificación de variables por ligadura de espacio
+
+* Estáticas: La memoria se asigna antes de la ejecución y persiste durante todo el programa. Ejemplo: static int contador = 0;
+* Dinámicas en pila: La memoria se asigna en tiempo de ejecución al entrar al bloque o función. Ejemplo: Variables locales como int x; dentro de un método.
+* Dinámicas explícitas (Montón): La memoria es asignada y liberada manualmente por el programador. Ejemplo: Uso de new en Java o malloc() en C.
+* Dinámicas implícitas (Montón): La memoria se asigna automáticamente cuando se le asigna un valor a la variable. Ejemplo: Creación de listas en Python como lista = [1, 2, 3].
+
+Ejercicio 6. Bloques y variables
+
+a) Bloque anidado: El bloque sin nombre dentro de proc1 que contiene las declaraciones int k, a;
+b) Visibilidad simultánea global: En main(), ya que no hay variables locales dentro de main que oculten a las globales a, b y c.
+c) Accesibles desde main: Únicamente las variables globales a, b y c.
+d) ¿Son j de proc1 y j de proc2 la misma variable?: No. Son variables locales independientes almacenadas en espacios de memoria diferentes (pertenecen a distintos marcos de pila de cada procedimiento).
+e) ¿Global b accesible desde proc2?: No, la variable global es ocultada (shadowing) por la variable local int b que está declarada dentro de proc2.
+f) Uso simultáneo de k y j: Dentro del bloque anidado de proc1 (donde se declara k), la variable j del bloque exterior de proc1 sigue siendo visible y accesible al mismo tiempo.
+
+Ejercicio 7. Ámbitos de ejecución
+
+* Con ámbito estático: Imprime x=9. El procedimiento mostrar utiliza la variable global definida en su entorno léxico original donde fue escrito el código.
+* Con ámbito dinámico: Imprime x=21. El procedimiento mostrar utiliza la variable local del entorno desde el cual fue llamado en tiempo de ejecución, es decir, el entorno del procedimiento cambiar.
+
+Ejercicio 8. Características de Ruby y entrega
+
+* Orientado a objetos puro: Absolutamente todo en Ruby es un objeto, incluidos los tipos de datos básicos como números y valores booleanos. No existen tipos primitivos independientes.
+* Sintaxis elegante y legible: Su diseño prioriza la expresividad y la lectura natural del código, minimizando la necesidad de símbolos estructurales estrictos como los puntos y comas.
+* Lenguaje dinámico: Permite modificar la estructura del programa durante la ejecución (metaprogramación), posibilitando la adición de métodos a clases existentes en tiempo real.
+* Tipado dinámico y fuerte: El tipo de dato se asocia a la variable en tiempo de ejecución (dinámico), pero el lenguaje es estricto en las operaciones y no realiza conversiones automáticas entre tipos incompatibles (fuerte).
+* Interpretado: El código es leído y ejecutado instrucción por instrucción por un intérprete, sin requerir un proceso de compilación previa a código máquina.
+* Código abierto y Multiplataforma: Su código fuente es de libre acceso y los programas desarrollados pueden ejecutarse en distintos sistemas operativos (Linux, macOS, Windows) sin requerir reescritura.
+* Entrega del taller: Debe enviarse como archivo Word con el formato Apellido1_Nombre1_Apellido2_Nombre2_Taller3.docx. El documento no será revisado si se realiza a mano.
 </textarea>
 
 <br><br>
